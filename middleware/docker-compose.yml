@@ -1,0 +1,6 @@
+services:
+  mq-middleware:
+    build: .
+    image: ghcr.io/szhipeng625/mq:latest
+    network_mode: host
+    restart: unless-stopped

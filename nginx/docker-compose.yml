@@ -1,0 +1,10 @@
+services:
+  nginx:
+    build: .
+    image: ghcr.io/szhipeng625/oj_nginx:latest
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - /var/log/nginx:/var/log/nginx
+      - /usr/share/nginx/html:/usr/share/nginx/html:ro
