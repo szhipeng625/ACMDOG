@@ -16,6 +16,8 @@ run_case "compose_middleware" "docker compose -f middleware/docker-compose.yml c
 run_case "compose_nginx" "docker compose -f nginx/docker-compose.yml config -q"
 run_case "nginx_config_syntax" "bash .github/scripts/check_nginx.sh"
 run_case "cloud_judge_build" "cmake -S cloud_judge -B build/cloud_judge -DCMAKE_BUILD_TYPE=Release > /dev/null && cmake --build build/cloud_judge -j4 > /dev/null"
+run_case "lsm_business_smoke" "python3 tests/test_lsm_smoke.py > /dev/null"
+run_case "e2e_full_chain" "python3 tests/e2e/test_full_chain.py > /dev/null"
 
 echo ""
 echo "=== SUMMARY ==="
