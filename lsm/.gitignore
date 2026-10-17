@@ -1,0 +1,25 @@
+.idea
+.vs
+.vscode
+.xmake
+sdk.dlldemo
+build
+sdk/tinylsm/dist
+sdk/tinylsm/build
+sdk/tinylsm/tinylsm/core/lib
+sdk/tinylsm/tinylsm.egg-info
+*__pycache__*
+book
+coverage*
+.clangd
+*.log*
+sst_html
+.cache
+compile_commands.json
+
+# build intermediates
+obj
+*.o
+
+# downloaded third-party archives (compilation uses third_party/*/include instead)
+third_party/download
