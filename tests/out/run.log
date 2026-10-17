@@ -1,0 +1,10 @@
+16:00:57 | workflow_yaml_valid          | PASS |     0s | workflow ok: .github/workflows/acmdog-gate.yml jobs: 1 steps: 7
+16:00:57 | lsm_binary_present           | PASS |     0s | 
+16:00:57 | lsm_binary_elf               | PASS |     0s | 
+16:00:57 | lsm_binary_hash              | PASS |     0s | deploy/lsm/lsm_server: OK
+16:00:58 | lsm_config_toml              | PASS |     0s | config ok: deploy/lsm/config.toml keys: 3
+16:00:58 | compose_yaml_valid           | PASS |     0s | yaml ok: middleware/docker-compose.yml yaml ok: nginx/docker-compose.yml
+16:00:58 | compose_middleware           | PASS |     0s | 
+16:00:58 | compose_nginx                | PASS |     0s | 
+16:00:59 | nginx_config_syntax          | PASS |     1s | nginx: configuration file /etc/nginx/nginx.conf test is successful nginx config ok
+16:00:59 | cloud_judge_build            | PASS |     0s | 
