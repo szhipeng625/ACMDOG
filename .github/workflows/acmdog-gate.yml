@@ -1,0 +1,46 @@
+name: ACMDOG Gate
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  gate:
+    name: verify deploy artifacts and configs
+    runs-on: [self-hosted, Linux, X64]
+    timeout-minutes: 30
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: verify lsm deploy artifacts
+        run: |
+          set -euo pipefail
+          test -f deploy/lsm/lsm_server
+          test -f deploy/lsm/config.toml
+          file deploy/lsm/lsm_server | grep -q ELF
+          sha256sum -c .github/lsm-server.sha256
+
+      - name: check lsm config format
+        run: python3 .github/scripts/check_config.py deploy/lsm/config.toml
+
+      - name: build cloud_judge
+        run: |
+          set -euo pipefail
+          cmake -S cloud_judge -B build/cloud_judge -DCMAKE_BUILD_TYPE=Release
+          cmake --build build/cloud_judge -j$(nproc)
+
+      - name: check nginx config syntax
+        run: bash .github/scripts/check_nginx.sh
+
+      - name: check compose yaml
+        run: |
+          set -euo pipefail
+          python3 .github/scripts/check_yaml.py middleware/docker-compose.yml nginx/docker-compose.yml
+          docker compose -f middleware/docker-compose.yml config -q
+          docker compose -f nginx/docker-compose.yml config -q
+
+      - name: gate passed
+        run: echo all gate checks passed
