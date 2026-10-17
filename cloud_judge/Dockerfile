@@ -9,7 +9,7 @@ RUN cmake -B build -DCMAKE_BUILD_TYPE=Release && cmake --build build -j$(nproc)
 
 # ---------- Stage 2: runtime (Python consumer + C++ binaries) ----------
 FROM ubuntu:24.04
-RUN apt-get update && apt-get install -y --no-install-recommends python3 python3-pip libseccomp2 ca-certificates && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends python3 python3-pip g++ libseccomp2 ca-certificates && rm -rf /var/lib/apt/lists/*
 RUN pip3 install --no-cache-dir --break-system-packages pika==1.4.4
 
 WORKDIR /home/admin/eval-worker
