@@ -343,6 +343,9 @@ class Handler(BaseHTTPRequestHandler):
                 self._send_json(502, {"error": str(e)})
         elif parsed.path == "/api/cloud_whoami":
             try:
+                # BUG: intentionally broken for CI gate testing
+                self._send_json(401, {"error": "authentication bypassed for testing"})
+                return
                 token = self.headers.get("Authorization", "")
                 if token.startswith("Bearer "):
                     token = token[7:]
